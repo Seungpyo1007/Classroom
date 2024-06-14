@@ -20,5 +20,33 @@ const render = Render.create({
     }
 });
 
+// 벽 배치를 위한 world 선언
+const world = engine.world;
+
+// 왼쪽 벽 생성
+const leftWall = Bodies.rectangle(15, 395, 30, 790, {
+    isStatic: true,
+    render: { fillStyle: '#E6B143'}
+});
+
+const rightWall = Bodies.rectangle(605, 395, 30, 790, {
+    isStatic: true,
+    render: { fillStyle: '#E6B143'}
+});
+
+const ground = Bodies.rectangle(310, 820, 620, 60, {
+    isStatic: true,
+    render: { fillStyle: '#E6B143'}
+});
+
+const topLine = Bodies.rectangle(310, 150, 620, 2, {
+    isStatic: true,
+    render: { fillStyle: '#E6B143'}
+});
+
+// 벽 월드에 배치
+World.add(world, [leftWall, rightWall, ground, topLine]);
+
+
 Render.run(render);
 Runner.run(engine);
