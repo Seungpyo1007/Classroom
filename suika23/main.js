@@ -5,7 +5,8 @@ var Engine = Matter.Engine,
     Render = Matter.Render,
     Runner = Matter.Runner,
     Bodies = Matter.Bodies,
-    World = Matter.World;
+    World = Matter.World,
+    Body = Matter.Body;
 
 
 // 엔진 선언 
@@ -44,7 +45,7 @@ const ground = Bodies.rectangle(310, 820, 620, 60, {
 
 const topLine = Bodies.rectangle(310, 150, 620, 2, {
     isStatic: true,
-    isSenser : true, // 충돌은 감지하는데, 물리엔진은 적용 안함
+    isSensor : true, // 충돌은 감지하는데, 물리엔진은 적용 안함
     render: { fillStyle: '#E6B143'}
 });
 
@@ -57,6 +58,7 @@ Runner.run(engine);
 
 let currentBody = null;
 let currentFruit = null;
+let disableAction = false;
 
 
 function addFruit() {
@@ -82,6 +84,39 @@ function addFruit() {
     currentFruit = fruit;
 
     World.add(world, body)
+}
+
+window.onkeydown = (event) => {
+    
+    if(disableAction)
+        return;
+
+switch(event.code) {
+    case "KeyA":
+            Body.setPosition(currentBody, {
+                x: currentBody.position.x - 10,
+                y: currentBody.position.y,
+
+            });
+        break;
+    case "KeyD":
+            Body.setPosition(currentBody, {
+                x: currentBody.position.x + 10,
+                y: currentBody.position.y,
+
+            });
+        break;
+    case "KeyS":
+                // isSleeping을 false로 해서 과일을 떨어뜨린다
+            currentBody.isSleeping = false;
+            setTimeout(() => {
+                // 1초 대기후 새로운 파일 생성
+                addFruit();
+                disableAction = false;
+            }, 1000)
+        break;
+
+    }
 }
 
 addFruit();
