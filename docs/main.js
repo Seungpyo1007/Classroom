@@ -78,7 +78,7 @@ function addFruit() {
         index: index,
         isSleeping: true, // 시작시 바로 떨어지지 않고 잠시 멈춤
         render: {
-            sprite: { texture: `${fruit.name}.png` }
+            sprite: { texture: fruit.texture }
         },
 
         // 통통 튀기는 설정
@@ -117,7 +117,7 @@ window.onkeydown = (event) => {
                 return;
             // 인터별 변수를 사용. 밀리초 단위로 함수를 반복
             interval = setInterval(() => {
-                if (currentBody.position.x - currentFruit.radius > 590)
+                if (currentBody.position.x + currentFruit.radius < 590)
                     Body.setPosition(currentBody, {
                         x: currentBody.position.x + 1,
                         y: currentBody.position.y,
@@ -170,13 +170,13 @@ Events.on(engine, "collisionStart", (event) => {
                 {
                     //과일이 합쳐졌으므로 index + 1
                     index: index + 1,
-                    render: { sprite: { texture: `${newFruit.name}.png` } },
+                    render: { sprite: { texture: newFruit.texture } },
                 }
             )
 
 
             // 생성한 과일 월드에 추가
-            World.add(world.newBody)
+            World.add(world, newBody)
         }
 
         if (!disableAction && (collision.bodyA.name == "topLine" || collision.bodyB.name === "topLine")) {
