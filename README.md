@@ -1,5 +1,7 @@
 ## 수박 게임 (Suika) 클론
 
+[🎮 게임 플레이하기 (Demo)](https://seungpyo1007.github.io/Classroom/)
+
 물리 엔진으로 과일을 떨어뜨려 같은 과일이 합쳐지도록 만드는 간단한 수박 게임입니다.
 
 ### 기능 요약
@@ -22,5 +24,8 @@
 npx serve docs
 ```
 2) 브라우저에서 `http://localhost:3000`으로 접속합니다.
+
+### 라이선스
+이 프로젝트는 [MIT 라이선스](LICENSE)를 따릅니다.
 
 
